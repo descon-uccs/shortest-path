@@ -79,5 +79,5 @@ def dijkstra_animated(G, pos, source, target):
 if __name__ == "__main__":
     random.seed(42)
     G, pos = generate_graph(num_nodes=100, connection_radius=0.2)
-    source, target = random.sample(G.nodes, 2)
+    source, target = random.sample(list(G.nodes), 2)
     ani = dijkstra_animated(G, pos, source, target)
