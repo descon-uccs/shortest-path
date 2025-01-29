@@ -20,7 +20,7 @@ def generate_graph(num_nodes=10, connection_radius=0.3):
     return G, pos
 
 # Dijkstra's algorithm implementation with animation support
-def dijkstra_animated(G, pos, source, target):
+def dijkstra_animated(G, pos, source, target,animate=False):
     fig, ax = plt.subplots(figsize=figsize)
     
     # Priority queue
@@ -73,7 +73,19 @@ def dijkstra_animated(G, pos, source, target):
             nx.draw_networkx_nodes(G, pos, nodelist=path, node_color='red', ax=ax)
             nx.draw_networkx_edges(G, pos, edgelist=[(path[i], path[i+1]) for i in range(len(path)-1)], edge_color='red', width=2, ax=ax)
     
-    ani = FuncAnimation(fig, update, frames=len(steps), interval=10, repeat=False)
+    ani=None
+    if animate: 
+        ani = FuncAnimation(fig, update, frames=len(steps), interval=10, repeat=False)
+    else :
+        ax.clear()
+        nx.draw(G, pos, with_labels=True, node_color='lightgray', edge_color='gray', ax=ax)
+        visited_nodes = [s[0] for s in steps]
+        nx.draw_networkx_nodes(G, pos, nodelist=visited_nodes, node_color='blue', ax=ax)
+        nx.draw_networkx_nodes(G, pos, nodelist=[source], node_color='green', ax=ax)
+        nx.draw_networkx_nodes(G, pos, nodelist=[target], node_color='red', ax=ax)
+        nx.draw_networkx_nodes(G, pos, nodelist=path, node_color='red', ax=ax)
+        nx.draw_networkx_edges(G, pos, edgelist=[(path[i], path[i+1]) for i in range(len(path)-1)], edge_color='red', width=2, ax=ax)
+    
     plt.show()
     return ani
   
@@ -82,4 +94,4 @@ if __name__ == "__main__":
     random.seed(42)
     G, pos = generate_graph(num_nodes=100, connection_radius=0.2)
     source, target = random.sample(list(G.nodes), 2)
-    ani = dijkstra_animated(G, pos, source, target)
+    ani = dijkstra_animated(G, pos, source, target, animate = True)
