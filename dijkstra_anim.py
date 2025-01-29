@@ -6,6 +6,8 @@ import time
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
+figsize = (6,6)
+
 # Generate a random geometric graph
 def generate_graph(num_nodes=10, connection_radius=0.3):
     G = nx.random_geometric_graph(num_nodes, connection_radius)
@@ -19,7 +21,7 @@ def generate_graph(num_nodes=10, connection_radius=0.3):
 
 # Dijkstra's algorithm implementation with animation support
 def dijkstra_animated(G, pos, source, target):
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=figsize)
     
     # Priority queue
     pq = [(0, source)]
