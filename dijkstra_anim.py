@@ -62,7 +62,7 @@ def dijkstra_animated(G, pos, source, target,animate=False):
     # Animation function
     def update(num):
         ax.clear()
-        nx.draw(G, pos, with_labels=True, node_color='lightgray', edge_color='gray', ax=ax)
+        nx.draw(G, pos, with_labels=False, node_color='lightgray', edge_color='gray', ax=ax)
         visited_nodes = [s[0] for s in steps[:num+1]]
         nx.draw_networkx_nodes(G, pos, nodelist=visited_nodes, node_color='blue', ax=ax)
         nx.draw_networkx_nodes(G, pos, nodelist=[source], node_color='green', ax=ax)
@@ -78,7 +78,7 @@ def dijkstra_animated(G, pos, source, target,animate=False):
         ani = FuncAnimation(fig, update, frames=len(steps), interval=10, repeat=False)
     else :
         ax.clear()
-        nx.draw(G, pos, with_labels=True, node_color='lightgray', edge_color='gray', ax=ax)
+        nx.draw(G, pos, with_labels=False, node_color='lightgray', edge_color='gray', ax=ax)
         visited_nodes = [s[0] for s in steps]
         nx.draw_networkx_nodes(G, pos, nodelist=visited_nodes, node_color='blue', ax=ax)
         nx.draw_networkx_nodes(G, pos, nodelist=[source], node_color='green', ax=ax)
